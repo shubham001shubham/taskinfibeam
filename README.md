@@ -18,3 +18,4 @@ python manage.py createsuperuser (to login as admin user in web)
 
 13) install axes package for blocking user inavlid attempt - pip install django-axes
 		
+Note - 3 Invalid login attempt code is commented in all module due to some issue in my code.
