@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'My_App',
     'crispy_forms',
+    #'axes',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
+    #'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'My_Project.urls'
@@ -139,3 +142,25 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'image')
 MEDIA_URL = '/image/'
+
+"""
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+#AXES_USERNAME_CALLABLE = 'myapp.utils.get_username'
+SILENCED_SYSTEM_CHECKS = ['axes.W003']
+AXES_HANDLER = 'axes.handlers.cache.AxesCacheHandler'
+CACHES = {
+    'axes': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:8000',
+    },
+    'default':{},
+}
+
+AXES_CACHE = 'axes'"""

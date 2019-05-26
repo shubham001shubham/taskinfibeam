@@ -44,6 +44,7 @@ def login(request):
             return redirect('/dashboard')
         elif request.user.is_authenticated:
             return redirect('/dashboard2')
+
         form = AuthenticationForm()
 
     return render(request,'My_App/login.html',{'form':form,})
@@ -186,3 +187,61 @@ except:
     response = "India"
     print(response)
 reader.close()
+
+
+"""from axes.decorators import axes_dispatch
+
+@method_decorator(axes_dispatch, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+
+class LoginView(View):
+    def login(request):
+        if request.method == 'POST':
+            form = AuthenticationForm(data = request.POST)
+            if form.is_valid():
+
+                #return HttpResponse(status=400)
+
+                #email = request.POST['email']
+                #password = request.POST['password']
+                email = form.cleaned_data.get("email")
+                print(email)
+                password = form.cleaned_data.get("password")
+                print(password)
+                user = django_authenticate(request,email=email, password=password)
+                print(user)
+                if user is not None:
+                    if user.is_active:
+                        django_login(request,user)
+                        signals.user_logged_in.send(
+                            sender=email,
+                            request=request,
+                            user=user,
+                        )
+
+                        return redirect('/dashboard') #user is redirected to dashboard
+                # else:
+                #     form = AuthenticationForm()
+                #     return render(request,'myapp/login.html',{'form':form,'error':"Invalid Login!"})
+                 # inform django-axes of failed login
+                else:
+                    email = form.cleaned_data.get("email")
+                    print(21246546545)
+                    print(request)
+                    signals.user_login_failed.send(
+                        sender = User,
+                        request=request,
+                        credentials={
+                            'email': email,
+                        },
+                    )
+
+                    #return HttpResponse(status=403)
+                    return render(request,'myapp/login.html',{'form':form,'error':"Invalid Login!"})
+
+        else:
+            form = AuthenticationForm()
+
+        return render(request,'myapp/login.html',{'form':form,})
+
+"""
